@@ -1,0 +1,63 @@
+// Definition for a binary tree node.
+#[derive(Debug, PartialEq, Eq)]
+pub struct TreeNode {
+    pub val: i32,
+    pub left: Option<Rc<RefCell<TreeNode>>>,
+    pub right: Option<Rc<RefCell<TreeNode>>>,
+}
+
+impl TreeNode {
+    #[inline]
+    pub fn new(val: i32) -> Self {
+        TreeNode {
+            val,
+            left: None,
+            right: None,
+        }
+    }
+}
+
+use std::rc::Rc;
+use std::cell::RefCell;
+
+fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+    match root {
+        Some(node) => {
+            let node = node.borrow();
+            let left_depth = max_depth(node.left.clone());
+            let right_depth = max_depth(node.right.clone());
+            1 + left_depth.max(right_depth)
+        }
+        None => 0,
+    }
+}
+
+fn main() {
+    // Example usage:
+    // Creating a binary tree: 
+    //      3
+    //     / \
+    //    9  20
+    //      /  \
+    //     15   7
+    let root = Some(Rc::new(RefCell::new(TreeNode {
+        val: 3,
+        left: Some(Rc::new(RefCell::new(TreeNode::new(9)))),
+        right: Some(Rc::new(RefCell::new(TreeNode {
+            val: 20,
+            left: Some(Rc::new(RefCell::new(TreeNode::new(15)))),
+            right: Some(Rc::new(RefCell::new(TreeNode::new(7)))),
+        }))),
+    })));
+
+    let depth = max_depth(root);
+    println!("Maximum depth of the binary tree: {}", depth);
+}
+In this code:
+
+We define a TreeNode struct representing each node of the binary tree.
+The max_depth function recursively calculates the maximum depth of the binary tree. It takes an Option<Rc<RefCell<TreeNode>>> as input, where Rc is a reference-counted smart pointer and RefCell provides interior mutability. This allows us to modify the nodes of the tree even when they are shared.
+Inside the max_depth function, we match on the Option to handle both the case of a Some containing a node and the case of None (i.e., an empty tree).
+When a node is present, we recursively find the maximum depth of its left and right subtrees, and return the maximum depth plus 1 (to account for the current node).
+When a node is absent (i.e., None), we return 0, representing the depth of an empty subtree.
+In the main function, we create an example binary tree and call the max_depth function to find its maximum depth.
