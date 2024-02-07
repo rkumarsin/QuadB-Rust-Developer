@@ -1,0 +1,17 @@
+fn find_median(arr: &[i32]) -> f64 {
+    let len = arr.len();
+    if len % 2 == 0 {
+        let mid_right = len / 2;
+        let mid_left = mid_right - 1;
+        (arr[mid_left] as f64 + arr[mid_right] as f64) / 2.0
+    } else {
+        arr[len / 2] as f64
+    }
+}
+
+fn main() {
+    let arr = [1, 2, 3, 4, 5, 6];
+    let median = find_median(&arr);
+    println!("The median of the array is: {}", median);
+}
+This function takes a reference to a sorted array of integers as input. It calculates the length of the array and checks if it's even or odd. If it's even, it takes the two middle elements and returns their average as the median. If it's odd, it returns the middle element directly as the median.
