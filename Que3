@@ -1,0 +1,19 @@
+fn shortest_word(s: &str) -> Option<&str> {
+    s.split_whitespace().min_by_key(|word| word.len())
+}
+
+fn main() {
+    let input_str = "The quick brown fox jumps over the lazy dog";
+    if let Some(shortest) = shortest_word(input_str) {
+        println!("The shortest word is: {}", shortest);
+    } else {
+        println!("No words found in the input string.");
+    }
+}
+
+This function splits the input string into words using split_whitespace(), then uses min_by_key() to find the word with the minimum length. It returns an Option<&str> representing the shortest word, or None if the input string is empty.
+
+
+
+
+
