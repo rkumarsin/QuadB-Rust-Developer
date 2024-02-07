@@ -1,0 +1,34 @@
+fn longest_common_prefix(strings: &[String]) -> String {
+    if strings.is_empty() {
+        return String::new();
+    }
+    
+    let first_string = &strings[0];
+    let mut prefix = String::new();
+    
+    'outer: for (i, ch) in first_string.chars().enumerate() {
+        for string in strings.iter().skip(1) {
+            if let Some(c) = string.chars().nth(i) {
+                if c != ch {
+                    break 'outer;
+                }
+            } else {
+                break 'outer;
+            }
+        }
+        prefix.push(ch);
+    }
+    
+    prefix
+}
+
+fn main() {
+    let strings = vec![
+        String::from("flower"),
+        String::from("flow"),
+        String::from("flight"),
+    ];
+    let prefix = longest_common_prefix(&strings);
+    println!("Longest common prefix: {}", prefix);
+}
+This function takes a slice of strings as input. It initializes the prefix variable to an empty string. It iterates over the characters of the first string in the slice (first_string). For each character, it checks if the character exists at the same position in all other strings. If it does, it appends the character to the prefix. If it doesn't, it breaks the outer loop. Finally, it returns the prefix.
