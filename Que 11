@@ -1,0 +1,35 @@
+fn merge_sorted_arrays(arr1: &[i32], arr2: &[i32]) -> Vec<i32> {
+    let mut result = Vec::with_capacity(arr1.len() + arr2.len());
+    let (mut i, mut j) = (0, 0);
+
+    while i < arr1.len() && j < arr2.len() {
+        if arr1[i] <= arr2[j] {
+            result.push(arr1[i]);
+            i += 1;
+        } else {
+            result.push(arr2[j]);
+            j += 1;
+        }
+    }
+
+    result.extend_from_slice(&arr1[i..]);
+    result.extend_from_slice(&arr2[j..]);
+
+    result
+}
+
+fn main() {
+    let arr1 = [1, 3, 5, 7, 9];
+    let arr2 = [2, 4, 6, 8, 10];
+    let merged = merge_sorted_arrays(&arr1, &arr2);
+    println!("Merged array: {:?}", merged);
+}
+The merge_sorted_arrays function takes two slices of sorted arrays as input.
+It initializes an empty vector result to store the merged result and sets two pointers, i and j, to the start of the arrays.
+It iterates through the arrays using the pointers, comparing elements at arr1[i] and arr2[j], and pushing the smaller one into the result.
+After the loop, it appends the remaining elements of both arrays to result.
+In the main function, two sorted arrays arr1 and arr2 are defined, and the merge_sorted_arrays function is called to merge them. The merged array is then printed.
+
+
+
+
