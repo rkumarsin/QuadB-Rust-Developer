@@ -1,0 +1,15 @@
+fn is_palindrome(s: &str) -> bool {
+    let s = s.to_lowercase(); // Convert string to lowercase to ignore case
+    let s = s.chars().filter(|c| c.is_alphanumeric()).collect::<String>(); // Remove non-alphanumeric characters
+    s.chars().eq(s.chars().rev()) // Check if the string is equal to its reverse
+}
+
+fn main() {
+    let test_str = "A man, a plan, a canal, Panama!";
+    if is_palindrome(test_str) {
+        println!("\"{}\" is a palindrome.", test_str);
+    } else {
+        println!("\"{}\" is not a palindrome.", test_str);
+    }
+}
+This function first converts the input string to lowercase to ignore case when comparing characters. Then it filters out non-alphanumeric characters from the string. Finally, it checks if the filtered string is equal to its reverse, returning true if it is, and false otherwise.
