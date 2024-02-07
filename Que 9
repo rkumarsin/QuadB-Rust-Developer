@@ -1,0 +1,21 @@
+fn reverse_string(s: &str) -> String {
+    s.chars().rev().collect::<String>()
+}
+
+fn main() {
+    let original = "hello";
+    let reversed = reverse_string(original);
+    println!("Original: {}", original);
+    println!("Reversed: {}", reversed);
+}
+In this code:
+
+The reverse_string function takes a reference to a string s.
+It calls the chars method on the string to iterate over its characters.
+Then, it calls rev to reverse the order of the characters.
+Finally, it collects the characters into a String using collect.
+In the main function, an example string "hello" is passed to reverse_string, and the result is printed to the console.
+
+
+
+
